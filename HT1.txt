@@ -1,0 +1,13 @@
+1. INICIO
+2. Crear primera seccion
+3. Crear segunda seccion
+4. Escribir "Ingrese Estudiante"
+5. Leer Estudiante
+6. Si primera seccion <= 14
+7. Escribir "Puedes asignarte"
+8. Si segunda seccion <= 14
+9. Escribir "Puedes asignarte"
+10. Sino
+11. Escribir "Deben de abrir nueva seccion"
+12. Fin si
+13. FIN
