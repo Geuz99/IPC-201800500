@@ -5,21 +5,17 @@
  */
 package practica1;
 
+import java.util.Date;
+
 /**
  *
  * @author GEUZ99
  */
-public class Practica1 {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
-    MenuPrincipal miMenu;
-        miMenu = new MenuPrincipal();
+public class Juego {     
+    
+    public Juego() {   
         
     }
     
+   
 }

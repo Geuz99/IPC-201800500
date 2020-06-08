@@ -12,9 +12,11 @@ import java.util.Scanner;
  * @author GEUZ99
  */
 public class MenuPrincipal { 
+    
+    MenuTablero miTablero;
 
     public MenuPrincipal() {
-    Scanner entrada=new Scanner(System.in);   
+    Scanner entrada=new Scanner(System.in);  
     int nMenu=0;
     
     //ETIQUETA DE INCIO CONSOLA
@@ -33,26 +35,25 @@ public class MenuPrincipal {
                     "\n4. SALIR.");
             
             try {
-                System.out.print("En espera de su opcion...");
+                System.out.print(">>En espera de su opcion...");
                 nMenu=entrada.nextInt();
                 System.out.println("-------------------------------------");                
             }catch (Exception e) {
                 entrada.next();
-                System.out.println(" Ups... no has seleccionado una opcion valida");
+                System.out.println(">>UPS.. NO HAS INGRESADO UN DATO CORRECTO");
             }
             
             switch (nMenu) { //SWITCH PARA SELECCIONAR PRIMERA ORDEN
                 
-                case 1:     //CREAR EL TABLERO
-                    MenuTablero miTablero;
+                case 1:     //CREAR EL TABLERO                    
                         miTablero=new MenuTablero();                       
-                    break;
-                    
+                    break;                    
                 case 2: //REPORTE COMPLETO
                         
                     break;
                     
                 case 3: //REPORTE VICTORIAS
+                    
                         
                     break;                 
             }
