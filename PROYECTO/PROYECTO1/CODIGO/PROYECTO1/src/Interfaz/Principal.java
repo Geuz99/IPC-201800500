@@ -7,6 +7,7 @@ package Interfaz;
 
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,7 +18,7 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    public Principal() {        
+    public Principal() {
         initComponents();
     }
 
@@ -133,23 +134,34 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // METODO SOLICITAR SEGURO
-        
+
         SolicitarSeguro solicitardatos = new SolicitarSeguro(this, true);
         solicitardatos.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // METODO SALIR
-                
-         this.dispose();
+
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // METODO INICIAR SESION
-        
-        Panel_Asegurado asegurado = new Panel_Asegurado(this, true);
-        asegurado.setVisible(true);        
-                
+
+        String inicio = JOptionPane.showInputDialog("INGRESE SU DPI");
+
+        if (inicio.equals("ADMIN")) {
+            Admin administracion = new Admin();
+            administracion.setVisible(true);
+        } else if (inicio.equals("0")) {
+            PanelAsegurado asegurado = new PanelAsegurado();
+            asegurado.setVisible(true);
+        } else if (inicio.equals("1")) {
+            PanelNoAsegurado nasegurado = new PanelNoAsegurado();
+            nasegurado.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "NO CUENTAS CON UNA CUENTA ");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -188,8 +200,8 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);               
-                
+                new Principal().setVisible(true);
+
             }
         });
     }
@@ -204,5 +216,3 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
-
-

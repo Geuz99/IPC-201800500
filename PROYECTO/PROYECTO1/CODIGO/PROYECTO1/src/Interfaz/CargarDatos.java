@@ -5,6 +5,14 @@
  */
 package Interfaz;
 
+import Clases.Linea;
+import Clases.Marca;
+import Clases.Mecanica;
+import Clases.Modelo;
+import Clases.Repuesto;
+import Clases.Tipo;
+import Clases.Uso;
+
 /**
  *
  * @author GEUZ99
@@ -29,32 +37,32 @@ public class CargarDatos extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        txtArea = new javax.swing.JTextArea();
+        btnCargar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CARGAR DATOS");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtArea.setColumns(20);
+        txtArea.setRows(5);
+        jScrollPane1.setViewportView(txtArea);
 
-        jButton1.setBackground(new java.awt.Color(51, 255, 204));
-        jButton1.setText("Cargar");
-        jButton1.setBorder(new javax.swing.border.MatteBorder(null));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCargar.setBackground(new java.awt.Color(51, 255, 204));
+        btnCargar.setText("Cargar");
+        btnCargar.setBorder(new javax.swing.border.MatteBorder(null));
+        btnCargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCargarActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(51, 255, 204));
-        jButton2.setText("Cancelar");
-        jButton2.setBorder(new javax.swing.border.MatteBorder(null));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setBackground(new java.awt.Color(51, 255, 204));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setBorder(new javax.swing.border.MatteBorder(null));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
@@ -66,9 +74,9 @@ public class CargarDatos extends javax.swing.JDialog {
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -79,24 +87,183 @@ public class CargarDatos extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCargar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    
+    public static Tipo[] InvTipo = new Tipo[20];
+    public static Modelo[] InvModelo = new Modelo[20]; 
+    public static Marca[] InvMarca = new Marca[20];
+    public static Linea[] InvLinea = new Linea[20];
+    public static Uso[] InvUso = new Uso[20];
+    public static Mecanica[] InvMecanica = new Mecanica[20];
+    public static Repuesto[] InvRepuesto = new Repuesto[20];
+    
+    private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
+        // BOTON DE CARGAR
+        String infoCargas = txtArea.getText();
+        String[] datos = infoCargas.split("\n"); // PRIMER SPLIT PARA SEPARA ENTRE LINEA
+        for (String dato : datos) {            
+            String[] infoText = dato.split(","); // SEGUNDO SPLIT PARA SEPARAR ENTRE COMAS            
+            switch (infoText[0]) {
+                case "TIPO":
+                    //AGREGARLO AL ARREGLO DE TIPO
+                    addTipo(new Tipo(infoText[1], infoText[2]));                    
+                    break;
+                case "MODELO":
+                    //AGREGARLO AL ARREGLO DE MODELOS
+                    addModelo(new Modelo(infoText[1], infoText[2])); 
+                    break;
+                case "MARCA":
+                    //AGREGARLO AL ARREGLO DE MARCAS
+                    addMarca(new Marca(infoText[1], infoText[2])); 
+                    break;
+                case "LINEA":
+                   //AGREGARLO AL ARREGLO DE LINEA
+                    addLinea(new Linea(infoText[1], infoText[2])); 
+                    break;
+                case "USO":
+                    //AGREGARLO AL ARREGLO DE USO
+                    addUso(new Uso(infoText[1], infoText[2])); 
+                    break;
+                case "MECANICA":
+                    //AGREGARLO AL ARREGLO DE SERVICIOS
+                    addMecanica(new Mecanica(infoText[1], infoText[2]));                
+                    break;
+                case "REPUESTO":
+                    //AGREGARLO AL ARREGLO DE REPUESTOS
+                    addRepuesto(new Repuesto(infoText[1], infoText[2]));  
+                    break;
+            }
+        }
+        PrintTipo();
+        PrintModelo();
+        PrintMarca();
+        PrintLinea();
+        PrintUso();
+        PrintMecanica();
+        PrintRepuesto();        
+    }//GEN-LAST:event_btnCargarActionPerformed
+            // "ADD" METODOS QUE AGREGAN PRIMERO AL ARREGLO DE LA CLASE
+            // "PRINT" METODO QUE IMPRIME EL ARREGLO
+    public void addTipo(Tipo obj) {
+        for (int i = 0; i < 20; i++) {
+            if (InvTipo[i] == null) {
+                InvTipo[i] = obj;
+                return;
+            }
+        }
+    }
+    public void PrintTipo() {
+        for (int i = 0; i < 20; i++) {
+            if (InvTipo[i] != null) {
+                InvTipo[i].imprimir();
+            }
+        }
+    }
+    
+    public void addModelo(Modelo obj) {
+        for (int i = 0; i < 20; i++) {
+            if (InvModelo[i] == null) {
+                InvModelo[i] = obj;
+                return;
+            }
+        }
+    }
+    public void PrintModelo() {
+        for (int i = 0; i < 20; i++) {
+            if (InvModelo[i] != null) {
+                InvModelo[i].imprimir();
+            }
+        }
+    } 
+    public void addMarca(Marca obj) {
+        for (int i = 0; i < 20; i++) {
+            if (InvMarca[i] == null) {
+                InvMarca[i] = obj;
+                return;
+            }
+        }
+    }
+    public void PrintMarca() {
+        for (int i = 0; i < 20; i++) {
+            if (InvMarca[i] != null) {
+                InvMarca[i].imprimir();
+            }
+        }
+    } 
+    public void addLinea(Linea obj) {
+        for (int i = 0; i < 20; i++) {
+            if (InvLinea[i] == null) {
+                InvLinea[i] = obj;
+                return;
+            }
+        }
+    }
+    public void PrintLinea() {
+        for (int i = 0; i < 20; i++) {
+            if (InvLinea[i] != null) {
+                InvLinea[i].imprimir();
+            }
+        }
+    } 
+    public void addUso(Uso obj) {
+        for (int i = 0; i < 20; i++) {
+            if (InvUso[i] == null) {
+                InvUso[i] = obj;
+                return;
+            }
+        }
+    }
+    public void PrintUso() {
+        for (int i = 0; i < 20; i++) {
+            if (InvUso[i] != null) {
+                InvUso[i].imprimir();
+            }
+        }
+    } 
+     public void addMecanica(Mecanica obj) {
+        for (int i = 0; i < 20; i++) {
+            if (InvMecanica[i] == null) {
+                InvMecanica[i] = obj;
+                return;
+            }
+        }
+    }
+    public void PrintMecanica() {
+        for (int i = 0; i < 20; i++) {
+            if (InvMecanica[i] != null) {
+                InvMecanica[i].imprimir();
+            }
+        }
+    } 
+    public void addRepuesto(Repuesto obj) {
+        for (int i = 0; i < 20; i++) {
+            if (InvRepuesto[i] == null) {
+                InvRepuesto[i] = obj;
+                return;
+            }
+        }
+    }
+    public void PrintRepuesto() {
+        for (int i = 0; i < 20; i++) {
+            if (InvRepuesto[i] != null) {
+                InvRepuesto[i].imprimir();
+            }
+        }
+    } 
+    
+   
+    
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // METODO CANCELAR
-
         this.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,6 +291,21 @@ public class CargarDatos extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(CargarDatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -141,9 +323,9 @@ public class CargarDatos extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnCargar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea txtArea;
     // End of variables declaration//GEN-END:variables
 }
