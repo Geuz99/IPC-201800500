@@ -5,6 +5,10 @@
  */
 package Interfaz;
 
+import static Interfaz.Solicitudes.miscuentas;
+import javax.swing.JTable;
+import tablas.TablaMisIncidentes;
+
 /**
  *
  * @author GEUZ99
@@ -14,10 +18,70 @@ public class MisIncidentes extends javax.swing.JDialog {
     /**
      * Creates new form MisIncidentes
      */
+    
+    private JTable tablita;
+    TablaMisIncidentes modelo;
     public MisIncidentes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        tablita = new JTable();
+        modelo = new TablaMisIncidentes(ReporteIncidente.incidentes);
+        tablita.setModel(modelo);
+        jScrollPane3.setViewportView(tablita);
+        String nombre = InsertarDatosNombre(Principal.loginSi);
+        String telefono = InsertarDatosTelefono(Principal.loginSi);
+        PrecioPrima.setText(InsertarPrecioPrima(Principal.loginSi));
+        PrecioDeducible.setText(InsertarPrecioDeducible(Principal.loginSi));
+        Datos(nombre, telefono, Principal.loginSi);
     }
+    public void Datos(String nombre, String telefono, String dpi) {
+        DatosArea.setText("Nombre: " + nombre + "\n" + "Telefono: " + telefono + "\n" + "DPI: " + dpi
+                + "\n" + "Tipo: Asegurado");
+    }
+     public String InsertarDatosNombre(String dpi) {
+        String nombre = "";
+        for (int i = 0; i < 20; i++) {
+            if (miscuentas[i].getDpi().equals(dpi)) {
+                nombre = miscuentas[i].getNombre();
+                return nombre;
+            }
+        }
+        return nombre;
+    }
+     public String InsertarDatosTelefono(String dpi) {
+        String telefono = "";
+        for (int i = 0; i < 20; i++) {
+            if (miscuentas[i].getDpi().equals(dpi)) {
+                telefono = miscuentas[i].getTalefono();
+                return telefono;
+            }
+        }
+        return telefono;
+    }
+      public String InsertarPrecioPrima(String dpi) {
+        String prima = "";
+        for (int i = 0; i < 20; i++) {
+            if (miscuentas[i] != null) {
+                if (miscuentas[i].getDpi().equals(dpi)) {
+                    prima = miscuentas[i].getPoliza();
+                    return prima;
+                }
+            }
+        }
+        return prima;
+    }
+     public String InsertarPrecioDeducible(String dpi) {
+        String deducible = "";
+        for (int i = 0; i < 20; i++) {
+            if (miscuentas[i] != null) {
+                if (miscuentas[i].getDpi().equals(dpi)) {
+                    deducible = miscuentas[i].getDeducible();
+                    return deducible;
+                }
+            }
+        }
+        return deducible;
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,20 +93,37 @@ public class MisIncidentes extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        DatosArea = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        PrecioPrima = new javax.swing.JLabel();
+        PrecioDeducible = new javax.swing.JLabel();
+        btnDetalle = new javax.swing.JButton();
+        btnPagar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MIS INCIDENTES");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        DatosArea.setColumns(20);
+        DatosArea.setRows(5);
+        jScrollPane1.setViewportView(DatosArea);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        jLabel1.setText("PRECIO PRIMA");
+
+        jLabel2.setText("PRECIO DEDUCIBLE");
+
+        PrecioPrima.setText("monto");
+
+        PrecioDeducible.setText("monto");
+
+        btnDetalle.setBackground(new java.awt.Color(51, 255, 204));
+        btnDetalle.setText("DETALLE");
+        btnDetalle.setBorder(new javax.swing.border.MatteBorder(null));
+
+        btnPagar.setBackground(new java.awt.Color(51, 255, 204));
+        btnPagar.setText("PAGAR");
+        btnPagar.setBorder(new javax.swing.border.MatteBorder(null));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -51,20 +132,48 @@ public class MisIncidentes extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(124, 124, 124)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(PrecioPrima)
+                                .addGap(194, 194, 194)
+                                .addComponent(PrecioDeducible)))
+                        .addGap(0, 345, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(83, 83, 83)
+                .addComponent(btnPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PrecioPrima)
+                    .addComponent(PrecioDeducible))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -114,9 +223,14 @@ public class MisIncidentes extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea DatosArea;
+    private javax.swing.JLabel PrecioDeducible;
+    private javax.swing.JLabel PrecioPrima;
+    private javax.swing.JButton btnDetalle;
+    private javax.swing.JButton btnPagar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }

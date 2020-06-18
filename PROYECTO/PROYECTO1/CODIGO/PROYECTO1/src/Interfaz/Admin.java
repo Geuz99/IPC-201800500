@@ -29,12 +29,12 @@ public class Admin extends javax.swing.JFrame {
 
         btonReporteIncidente = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnTaller = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnAsegurados = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
+        btnNoAsegurados = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
@@ -63,8 +63,13 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(51, 255, 204));
-        jButton4.setText("COLA TALLER");
+        btnTaller.setBackground(new java.awt.Color(51, 255, 204));
+        btnTaller.setText("COLA TALLER");
+        btnTaller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTallerActionPerformed(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/solicitud.png"))); // NOI18N
 
@@ -80,8 +85,13 @@ public class Admin extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/tools.png"))); // NOI18N
 
-        jButton7.setBackground(new java.awt.Color(51, 255, 204));
-        jButton7.setText("NO ASEGURADOS");
+        btnNoAsegurados.setBackground(new java.awt.Color(51, 255, 204));
+        btnNoAsegurados.setText("NO ASEGURADOS");
+        btnNoAsegurados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNoAseguradosActionPerformed(evt);
+            }
+        });
 
         jButton8.setBackground(new java.awt.Color(51, 255, 204));
         jButton8.setText("REPORTES");
@@ -137,7 +147,7 @@ public class Admin extends javax.swing.JFrame {
                                         .addComponent(jLabel7))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(54, 54, 54)
-                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(btnTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
@@ -147,7 +157,7 @@ public class Admin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAsegurados, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(53, 53, 53)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnNoAsegurados, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(62, 62, 62)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -168,7 +178,7 @@ public class Admin extends javax.swing.JFrame {
                             .addComponent(solicitudes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btonReporteIncidente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -185,7 +195,7 @@ public class Admin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAsegurados, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnNoAsegurados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -213,6 +223,16 @@ public class Admin extends javax.swing.JFrame {
         ReporteIncidente misincidentes = new ReporteIncidente (this, true);
             misincidentes.setVisible(true);
     }//GEN-LAST:event_btonReporteIncidenteActionPerformed
+
+    private void btnTallerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTallerActionPerformed
+        ColaTaller miscolas = new ColaTaller(this, true);
+            miscolas.setVisible(true);
+    }//GEN-LAST:event_btnTallerActionPerformed
+
+    private void btnNoAseguradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoAseguradosActionPerformed
+        NoAsegurados noasegurados = new NoAsegurados(this, true);
+            noasegurados.setVisible(true);
+    }//GEN-LAST:event_btnNoAseguradosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,10 +271,10 @@ public class Admin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsegurados;
+    private javax.swing.JButton btnNoAsegurados;
+    private javax.swing.JButton btnTaller;
     private javax.swing.JButton btonReporteIncidente;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;

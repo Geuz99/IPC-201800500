@@ -5,14 +5,26 @@
  */
 package Interfaz;
 
+import Clases.Incidentes;
+import Clases.NoCuentas;
+import Clases.ColaTaller;
 import static Interfaz.CargarDatos.InvMecanica;
 import static Interfaz.CargarDatos.InvRepuesto;
+import static Interfaz.Solicitudes.miscuentas;
+//import static Interfaz.Solicitudes.nocuentas;
+import java.util.Random;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import tablas.TablaIncidente;
 
 /**
  *
  * @author GEUZ99
  */
 public class ReporteIncidente extends javax.swing.JDialog {
+
+    private JTable tablita;
+    TablaIncidente modelo;
 
     /**
      * Creates new form ReporteIncidente
@@ -22,22 +34,137 @@ public class ReporteIncidente extends javax.swing.JDialog {
         initComponents();
         PrintMecanica();
         PrintRepuesto();
+        tablita = new JTable();
+        modelo = new TablaIncidente(this.incidentes);
+        tablita.setModel(modelo);
+        jScrollPane1.setViewportView(tablita);
+
     }
-    
+    public static NoCuentas[] nocuentas = new NoCuentas[20];
+    public static Incidentes[] incidentes = new Incidentes[20];
+    public static ColaTaller[] colataller = new ColaTaller[20];
+    int seleccion;
+
     public void PrintMecanica() {
         for (int i = 0; i < 20; i++) {
             if (InvMecanica[i] != null) {
                 ServicioBox.addItem(InvMecanica[i].getNombre());
             }
         }
-    } 
+    }
+
     public void PrintRepuesto() {
         for (int i = 0; i < 20; i++) {
             if (InvRepuesto[i] != null) {
                 RepuestoBox.addItem(InvRepuesto[i].getNombre());
             }
         }
-    } 
+    }
+
+    public boolean CheckBox() {
+//        String autor = "AUTOR";
+//        String afectado = "AFECTADO";
+        if (AseguradoCulpable.isSelected()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void addNoCuentas(NoCuentas obj) {
+        for (int i = 0; i < 20; i++) {
+            if (nocuentas[i] != null) {
+                nocuentas[i] = obj;
+                return;
+            }
+        }
+    }
+
+    public void VerificaciondeCuenta() {
+        int contador = 0;
+        for (int i = 0; i < 20; i++) {
+            if (miscuentas[i] != null) {
+                if (miscuentas[i].getDpi().equals(dpiAseguradoTxt.getText())) {
+                    System.out.println("EL ASEGURADO SI TIENE SEGURO");
+                    contador = 1;
+                }
+            }
+        }
+        if (contador == 0) {
+            JOptionPane.showMessageDialog(null, "ESTE DPI NO CUENTA CON UN SEGURO");
+        }
+    }
+
+    public void addcuentas() {
+        int contador = 0;
+        for (int i = 0; i < 20; i++) {
+            if (miscuentas[i] != null) {
+                if (miscuentas[i].getDpi().equals(dpiTerceroTxt.getText())) {
+                    System.out.println("TIENE CUENTA");
+                    contador = 1;
+                } else {
+                    //System.out.println("EL TERCERO NO CUENTA CON UN SEGURO");
+//                    String nombre = JOptionPane.showInputDialog("POR FAVOR INGRESA TU NOMBRE ");
+//                    String Telefono = JOptionPane.showInputDialog("POR FAVOR INGRESA TU NUMERO DE TELEFONO");
+//                    String dpi = dpiTerceroTxt.getText();
+//                    addNoCuentas(new NoCuentas(nombre, dpi, Telefono));
+                }
+            }
+
+        }
+        if (contador == 0) {
+            System.out.println("EL TERCERO NO CUENTA CON UN SEGURO");
+            String nombre = JOptionPane.showInputDialog("POR FAVOR INGRESA TU NOMBRE ");
+                    String Telefono = JOptionPane.showInputDialog("POR FAVOR INGRESA TU NUMERO DE TELEFONO");
+                    String dpi = dpiTerceroTxt.getText();
+                    NoCuentas nocuentas = new NoCuentas(nombre,dpi,Telefono);
+//                    addNoCuentas(new NoCuentas(nombre, dpi, Telefono));
+                    SavenoCuentas(nocuentas);
+                    
+        }
+    }
+    public void SavenoCuentas(NoCuentas obj) {
+        for (int i = 0; i < incidentes.length; i++) {
+            if (nocuentas[i] == null) {
+                nocuentas[i] = obj;
+                break;
+            }
+
+        }
+    }
+
+    public String codigo() {
+        int randomNumber = new Random().nextInt(9000) + 1000;
+        String cod = String.valueOf(randomNumber);
+        return cod;
+    }
+
+    public double ValorServicios(String repuesto) {
+        double ValorRepuesto;
+        for (int i = 0; i < 20; i++) {
+            if (InvMecanica[i].getNombre().equals(repuesto)) {
+                ValorRepuesto = (InvMecanica[i].getPrecio());
+                return ValorRepuesto;
+            }
+        }
+        return 0;
+    }
+
+    public double ValorRepuesto(String servicio) {
+        double ValorRepuesto;
+        for (int i = 0; i < 20; i++) {
+            if (InvRepuesto[i].getNombre().equals(servicio)) {
+                ValorRepuesto = (InvRepuesto[i].getPrecio());
+                return ValorRepuesto;
+            }
+        }
+        return 0;
+    }
+
+    public double Total() {
+        double tot = ValorServicios(ServicioBox.getSelectedItem().toString());// + ValorRepuesto(RepuestoBox.getSelectedItem().toString());
+        return tot;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,8 +183,8 @@ public class ReporteIncidente extends javax.swing.JDialog {
         dpiTerceroTxt = new javax.swing.JTextField();
         ServicioBox = new javax.swing.JComboBox<>();
         RepuestoBox = new javax.swing.JComboBox<>();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        AseguradoCulpable = new javax.swing.JCheckBox();
+        TerceroSeguro = new javax.swing.JCheckBox();
         btnAgregar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jLabel5 = new javax.swing.JLabel();
@@ -76,19 +203,29 @@ public class ReporteIncidente extends javax.swing.JDialog {
 
         jLabel4.setText("REPUESTOS");
 
-        jCheckBox1.setText("EL ASEGURADO ES CULPABLE");
+        AseguradoCulpable.setText("EL ASEGURADO ES CULPABLE");
 
-        jCheckBox2.setText("EL TERCERO TIENE SEGURO");
+        TerceroSeguro.setText("EL TERCERO TIENE SEGURO");
 
         btnAgregar.setBackground(new java.awt.Color(51, 255, 204));
         btnAgregar.setText("AGREGAR");
         btnAgregar.setBorder(new javax.swing.border.MatteBorder(null));
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("TOTAL");
 
         btnReportar.setBackground(new java.awt.Color(51, 255, 204));
         btnReportar.setText("REPORTAR INCIDENTE");
         btnReportar.setBorder(new javax.swing.border.MatteBorder(null));
+        btnReportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportarActionPerformed(evt);
+            }
+        });
 
         Cancelar.setBackground(new java.awt.Color(51, 255, 204));
         Cancelar.setText("CANCELAR");
@@ -123,8 +260,8 @@ public class ReporteIncidente extends javax.swing.JDialog {
                                     .addComponent(RepuestoBox, 0, 280, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox1)
-                                    .addComponent(jCheckBox2)
+                                    .addComponent(AseguradoCulpable)
+                                    .addComponent(TerceroSeguro)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(28, 28, 28)
                                         .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))))
@@ -148,12 +285,12 @@ public class ReporteIncidente extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(dpiAseguradoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
+                    .addComponent(AseguradoCulpable))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dpiTerceroTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jCheckBox2))
+                    .addComponent(TerceroSeguro))
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -187,6 +324,65 @@ public class ReporteIncidente extends javax.swing.JDialog {
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
+
+    private void btnReportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportarActionPerformed
+        seleccion = ValorFila();
+        if (seleccion == -1) {
+            JOptionPane.showMessageDialog(null, "No has seleccionado una fila");
+
+        } else {
+            String c0 = (String) tablita.getValueAt(seleccion, 0);
+            String c1 = dpiAseguradoTxt.getText();
+            String c2 = dpiTerceroTxt.getText();
+            addTaller(new ColaTaller(c0, c1, c2));
+        }
+
+    }//GEN-LAST:event_btnReportarActionPerformed
+    public void addTaller(ColaTaller obj) {
+        for (int i = 0; i < 20; i++) {
+            if (colataller[i] == null) {
+                colataller[i] = obj;
+                return;
+            }
+        }
+    }
+
+    public int ValorFila() {
+        int seleccion = tablita.getSelectedRow();
+        return seleccion;
+    }
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        boolean a = CheckBox();
+        String rolAsegurado;
+        String rolTercero;
+        if (a) {
+            rolAsegurado = "AUTOR";
+            rolTercero = "AFECTADO";
+        } else {
+            rolAsegurado = "AUTOR";
+            rolTercero = "AFECTADO";
+        }
+        VerificaciondeCuenta();
+        addcuentas();
+        String codigo = codigo();
+        String total = String.valueOf(Total());
+        TotalTxt.setText(total);
+        Incidentes inci = new Incidentes(codigo, rolAsegurado, rolTercero, total, dpiAseguradoTxt.getText(),
+                dpiTerceroTxt.getText(), ServicioBox.getSelectedItem().toString(), RepuestoBox.getSelectedItem().toString());
+        Save(inci);
+        
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    public void Save(Incidentes obj) {
+        for (int i = 0; i < incidentes.length; i++) {
+            if (incidentes[i] == null) {
+                incidentes[i] = obj;
+                break;
+            }
+
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -231,16 +427,16 @@ public class ReporteIncidente extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox AseguradoCulpable;
     private javax.swing.JButton Cancelar;
     private javax.swing.JComboBox<String> RepuestoBox;
     private javax.swing.JComboBox<String> ServicioBox;
+    private javax.swing.JCheckBox TerceroSeguro;
     private javax.swing.JTextField TotalTxt;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnReportar;
     private javax.swing.JTextField dpiAseguradoTxt;
     private javax.swing.JTextField dpiTerceroTxt;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

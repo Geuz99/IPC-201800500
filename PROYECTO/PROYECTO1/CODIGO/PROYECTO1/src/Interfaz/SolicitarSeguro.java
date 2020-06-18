@@ -404,6 +404,7 @@ public class SolicitarSeguro extends javax.swing.JDialog {
                 CostoPrimaTxt.getText(), DeducibleTxt.getText(), PCostoPrimaTxt.getText(), PosibleDeducibleTxt.getText());
         Save(solicitud);
         
+        Reset();
         
     }//GEN-LAST:event_SolicitarActionPerformed
     public void Save(Solicitudes obj) {
@@ -441,11 +442,11 @@ public class SolicitarSeguro extends javax.swing.JDialog {
         return 0;
     }
 
-    public double valorDepreciacion(int modelo) {
-        double Depreciacion;
+    public double valorDepreciacion(int modelo) { //if (InvModelo[i].getAnio().equal(String.valueOf(modelo)))
+        double Depreciacion;        
         for (int i = 0; i < 20; i++) {
             if (InvModelo[i].getAnio() == modelo) {
-                Depreciacion = InvModelo[i].getDepreciacion();
+                Depreciacion = (InvModelo[i].getDepreciacion()/100); //modifique para que fuera porcentaje
                 return Depreciacion;
             }
         }
@@ -465,7 +466,7 @@ public class SolicitarSeguro extends javax.swing.JDialog {
         double porMarca;
         for (int i = 0; i < 20; i++) {
             if (InvMarca[i].getNombre().equals(marca)) {
-                porMarca = InvMarca[i].getAumentoPoliza();
+                porMarca = (InvMarca[i].getAumentoPoliza()/100); //modifique para que fuera porcentaje
                 return porMarca;
             }
         }
@@ -476,7 +477,7 @@ public class SolicitarSeguro extends javax.swing.JDialog {
         double porLinea;
         for (int i = 0; i < 20; i++) {
             if (InvLinea[i].getNombre().equals(linea)) {
-                porLinea = InvLinea[i].getAumentoPoliza();
+                porLinea = (InvLinea[i].getAumentoPoliza()/100);//modifique para que fuera porcentaje
                 return porLinea;
             }
         }
@@ -487,7 +488,7 @@ public class SolicitarSeguro extends javax.swing.JDialog {
         double porUso;
         for (int i = 0; i < 20; i++) {
             if (InvUso[i].getNombre().equals(uso)) {
-                porUso = InvLinea[i].getAumentoPoliza();
+                porUso = (InvLinea[i].getAumentoPoliza()/100);//modifique para que fuera porcentaje
                 return porUso;
             }
         }
@@ -515,8 +516,8 @@ public class SolicitarSeguro extends javax.swing.JDialog {
     }
 
     public void menosd() {
-        double Pcp = Double.parseDouble(PCostoPrimaTxt.getText());
-        double Pcd = Double.parseDouble(PosibleDeducibleTxt.getText());
+        double Pcp = Double.parseDouble(CostoPrimaTxt.getText());
+        double Pcd = Double.parseDouble(DeducibleTxt.getText());
         double NewPcp;
         double NewPcd;
         NewPcd = Pcd - (Pcd * 0.10);
@@ -526,14 +527,25 @@ public class SolicitarSeguro extends javax.swing.JDialog {
     }
 
     public void masd() {
-        double Pcp = Double.parseDouble(PCostoPrimaTxt.getText());
-        double Pcd = Double.parseDouble(PosibleDeducibleTxt.getText());
+        double Pcp = Double.parseDouble(CostoPrimaTxt.getText());
+        double Pcd = Double.parseDouble(DeducibleTxt.getText());
         double NewPcp;
         double NewPcd;
         NewPcd = Pcd + (Pcd * 0.10);
         NewPcp = Pcp - (Pcp * 0.03);
         PCostoPrimaTxt.setText(String.valueOf(NewPcp));
         PosibleDeducibleTxt.setText(String.valueOf(NewPcd));
+    }
+    public void Reset(){
+        nombreTxt.setText("");
+        apellidoTxt.setText("");
+        DPI.setText("");
+        telefonoTxt.setText("");
+        ValorVehiculoTxt.setText("");
+        CostoPrimaTxt.setText("");
+        DeducibleTxt.setText("");
+        PCostoPrimaTxt.setText("");
+        PosibleDeducibleTxt.setText("");
     }
 
     /**

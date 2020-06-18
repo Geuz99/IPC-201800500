@@ -5,6 +5,7 @@
  */
 package Interfaz;
 
+import static Interfaz.ReporteIncidente.nocuentas;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,6 +24,22 @@ public class PanelNoAsegurado extends javax.swing.JFrame {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         String fechatexto = formato.format(miFecha);
         FechaSistema.setText("Fecha: " + fechatexto);
+        String nombre = InsertarDatosNombre(Principal.loginNo);
+        String telefono = InsertarDatosTelefono(Principal.loginNo);
+        Datos(nombre,telefono, Principal.loginNo);
+    }
+    public void Datos(String nombre, String telefono, String dpi){
+        DatosArea.setText("Nombre: " + nombre + "\n" + "Telefono: " + telefono + "\n" + "DPI: " + dpi);
+    }
+     public String InsertarDatosTelefono(String dpi) {
+        String telefono = "";
+        for (int i = 0; i < 20; i++) {
+            if (nocuentas[i].getDpi().equals(dpi)) {
+                telefono = nocuentas[i].getTalefono();
+                return telefono;
+            }
+        }
+        return telefono;
     }
 
     /**
@@ -35,7 +52,7 @@ public class PanelNoAsegurado extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        DatosArea = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -46,9 +63,9 @@ public class PanelNoAsegurado extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(" NO ASEGURADO");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        DatosArea.setColumns(20);
+        DatosArea.setRows(5);
+        jScrollPane1.setViewportView(DatosArea);
 
         jButton1.setBackground(new java.awt.Color(51, 255, 204));
         jButton1.setText("CERRAR SESION");
@@ -130,6 +147,17 @@ public class PanelNoAsegurado extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public String InsertarDatosNombre(String dpi) {
+        String nombre = "";
+        for (int i = 0; i < 20; i++) {
+            if (nocuentas[i].getDpi().equals(dpi)) {
+                nombre = nocuentas[i].getNombre();
+                return nombre;
+            }
+        }
+        return nombre;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -166,6 +194,7 @@ public class PanelNoAsegurado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea DatosArea;
     private javax.swing.JLabel FechaSistema;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
@@ -173,6 +202,5 @@ public class PanelNoAsegurado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

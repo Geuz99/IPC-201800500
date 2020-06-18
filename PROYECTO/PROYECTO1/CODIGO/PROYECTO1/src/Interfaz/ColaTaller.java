@@ -5,6 +5,10 @@
  */
 package Interfaz;
 
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import tablas.TablaColaTaller;
+
 /**
  *
  * @author GEUZ99
@@ -14,10 +18,18 @@ public class ColaTaller extends javax.swing.JDialog {
     /**
      * Creates new form ColaTaller
      */
+    private JTable tablita;
+    TablaColaTaller modelo;
     public ColaTaller(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        tablita = new JTable();
+        modelo = new TablaColaTaller(ReporteIncidente.colataller);
+        tablita.setModel(modelo);
+        jScrollPane1.setViewportView(tablita);
+        
     }
+    int seleccion;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,24 +40,86 @@ public class ColaTaller extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        btnTerminado = new javax.swing.JButton();
+        salir = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("COLA TALLER");
+
+        jLabel1.setText("INCIDENTES");
+
+        btnTerminado.setBackground(new java.awt.Color(51, 255, 204));
+        btnTerminado.setText("MARCAR COMO TERMINADO");
+        btnTerminado.setBorder(new javax.swing.border.MatteBorder(null));
+        btnTerminado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerminadoActionPerformed(evt);
+            }
+        });
+
+        salir.setBackground(new java.awt.Color(51, 255, 204));
+        salir.setText("SALIR");
+        salir.setBorder(new javax.swing.border.MatteBorder(null));
+        salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 708, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnTerminado, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 446, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTerminado, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_salirActionPerformed
+
+    private void btnTerminadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminadoActionPerformed
+       seleccion = ValorFila();
+       if (seleccion == -1) {
+            JOptionPane.showMessageDialog(null, "No has seleccionado una fila");
+        }else{
+           System.out.println("cambiar estado");           
+           
+       }
+    }//GEN-LAST:event_btnTerminadoActionPerformed
+     public int ValorFila() {
+        int seleccion = tablita.getSelectedRow();
+        return seleccion;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -89,5 +163,9 @@ public class ColaTaller extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTerminado;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton salir;
     // End of variables declaration//GEN-END:variables
 }

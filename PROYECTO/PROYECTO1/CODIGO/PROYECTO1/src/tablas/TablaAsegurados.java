@@ -52,7 +52,7 @@ public class TablaAsegurados extends AbstractTableModel{
                     valor = "PROTEGIDO";
                     break;
                 case 3:
-                    valor = "ULTIMA PRIMA";                    
+                    valor = "PENDIENTE";                    
                     break;                
             }
         }

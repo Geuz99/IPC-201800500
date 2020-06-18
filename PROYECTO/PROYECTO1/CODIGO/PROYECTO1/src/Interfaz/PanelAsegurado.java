@@ -5,6 +5,7 @@
  */
 package Interfaz;
 
+import static Interfaz.Solicitudes.miscuentas;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,6 +24,14 @@ public class PanelAsegurado extends javax.swing.JFrame {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         String fechatexto = formato.format(miFecha);
         jLabel4.setText("Fecha: " + fechatexto);
+        String nombre = InsertarDatosNombre(Principal.loginSi);
+        String telefono = InsertarDatosTelefono(Principal.loginSi);
+        Datos(nombre,telefono, Principal.loginSi);
+        
+    }
+    
+    public void Datos(String nombre, String telefono, String dpi){
+        DatosArea.setText("Nombre: " + nombre + "\n" + "Telefono: " + telefono + "\n" + "DPI: " + dpi);
     }
 
     /**
@@ -35,7 +44,7 @@ public class PanelAsegurado extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        DatosArea = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -48,9 +57,9 @@ public class PanelAsegurado extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PANEL ASEGURADO");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        DatosArea.setColumns(20);
+        DatosArea.setRows(5);
+        jScrollPane1.setViewportView(DatosArea);
 
         jLabel4.setText("Fecha: ");
 
@@ -159,11 +168,11 @@ public class PanelAsegurado extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // METODO CERRAR CESION
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void misSegurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_misSegurosActionPerformed
-        MisSeguros miseguro = new MisSeguros(this, true);
+        Asegurados_MisSeguros miseguro = new Asegurados_MisSeguros(this, true);
             miseguro.setVisible(true);
     }//GEN-LAST:event_misSegurosActionPerformed
 
@@ -177,6 +186,27 @@ public class PanelAsegurado extends javax.swing.JFrame {
             mispagos.setVisible(true);
     }//GEN-LAST:event_pagosActionPerformed
 
+    public String InsertarDatosNombre(String dpi) {
+        String nombre = "";
+        for (int i = 0; i < 20; i++) {
+            if (miscuentas[i].getDpi().equals(dpi)) {
+                nombre = miscuentas[i].getNombre();
+                return nombre;
+            }
+        }
+        return nombre;
+    }
+    public String InsertarDatosTelefono(String dpi) {
+        String telefono = "";
+        for (int i = 0; i < 20; i++) {
+            if (miscuentas[i].getDpi().equals(dpi)) {
+                telefono = miscuentas[i].getTalefono();
+                return telefono;
+            }
+        }
+        return telefono;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -213,13 +243,13 @@ public class PanelAsegurado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea DatosArea;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton misIncidentes;
     private javax.swing.JButton misSeguros;
     private javax.swing.JButton pagos;

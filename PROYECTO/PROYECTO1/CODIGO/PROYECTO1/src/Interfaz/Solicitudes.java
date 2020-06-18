@@ -21,7 +21,7 @@ public class Solicitudes extends javax.swing.JDialog {
      * Creates new form Solicitudes
      */
     public static Cuentas[] miscuentas = new Cuentas[20];
-    public static NoCuentas[] nocuentas = new NoCuentas[20];
+    //public static NoCuentas[] nocuentas = new NoCuentas[20];
     private JTable tablita;
     TablaSolicitud modelo;
     int Seleccion1;
@@ -134,7 +134,7 @@ public class Solicitudes extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "No has seleccionado una fila");
 
         } else {
-            String c0 = (String) tablita.getValueAt(Seleccion1, 0);
+            String c0 = (String) tablita.getValueAt(Seleccion1, 0);            
             String c1 = (String) tablita.getValueAt(Seleccion1, 1);
             String c2 = (String) tablita.getValueAt(Seleccion1, 2);
             String c3 = (String) tablita.getValueAt(Seleccion1, 3);
@@ -142,7 +142,7 @@ public class Solicitudes extends javax.swing.JDialog {
             String c5 = (String) tablita.getValueAt(Seleccion1, 5);
             String c6 = (String) tablita.getValueAt(Seleccion1, 6);
             String c7 = (String) tablita.getValueAt(Seleccion1, 7);
-            addcuentas(new Cuentas(c0, c1, c2, c3, c4, c5, c6, c7));              
+            addcuentas(new Cuentas(c1, c0, c2, c3, c4, c5, c6, c7));              
         }
     }//GEN-LAST:event_btnAprovarActionPerformed
 
@@ -156,19 +156,7 @@ public class Solicitudes extends javax.swing.JDialog {
             SolicitarSeguro.Reordenar();
             tablita.repaint();
             tablita.validate();
-            
-            
-            
-            
-//            String c0 = (String) tablita.getValueAt(Seleccion2, 0);
-//            String c1 = (String) tablita.getValueAt(Seleccion2, 1);
-//            String c2 = (String) tablita.getValueAt(Seleccion2, 2);
-//            String c3 = (String) tablita.getValueAt(Seleccion2, 3);
-//            String c4 = (String) tablita.getValueAt(Seleccion2, 4);
-//            String c5 = (String) tablita.getValueAt(Seleccion2, 5);
-//            String c6 = (String) tablita.getValueAt(Seleccion2, 6);
-//            String c7 = (String) tablita.getValueAt(Seleccion2, 7);
-//            addNOcuentas(new NoCuentas(c0, c1, c2, c3, c4, c5, c6, c7));              
+             
         }
 
     }//GEN-LAST:event_btnRechazarActionPerformed
@@ -186,14 +174,14 @@ public class Solicitudes extends javax.swing.JDialog {
         }
     }
 
-    public void addNOcuentas(NoCuentas obj) {
-        for (int i = 0; i < 20; i++) {
-            if (nocuentas[i] == null) {
-                nocuentas[i] = obj;
-                return;
-            }
-        }
-    }
+//    public void addNOcuentas(NoCuentas obj) {
+//        for (int i = 0; i < 20; i++) {
+//            if (nocuentas[i] == null) {
+//                nocuentas[i] = obj;
+//                return;
+//            }
+//        }
+//    }
 
     /**
      * @param args the command line arguments

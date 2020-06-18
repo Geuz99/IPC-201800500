@@ -5,6 +5,8 @@
  */
 package Interfaz;
 
+import static Interfaz.ReporteIncidente.nocuentas;
+import static Interfaz.Solicitudes.miscuentas;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JOptionPane;
@@ -21,6 +23,10 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
     }
+    String inicio;
+    public static String loginSi;
+    public static String loginNo;
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -148,21 +154,58 @@ public class Principal extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // METODO INICIAR SESION
 
-        String inicio = JOptionPane.showInputDialog("INGRESE SU DPI");
+        inicio = JOptionPane.showInputDialog("0. CUENTAS ASEGURADAS, 1. CUENTAS NO ASEGURADAS");
 
         if (inicio.equals("ADMIN")) {
             Admin administracion = new Admin();
             administracion.setVisible(true);
         } else if (inicio.equals("0")) {
-            PanelAsegurado asegurado = new PanelAsegurado();
-            asegurado.setVisible(true);
+            VerificaciondeCuentaAsegurado();
+//            PanelAsegurado asegurado = new PanelAsegurado();
+//            asegurado.setVisible(true);
         } else if (inicio.equals("1")) {
-            PanelNoAsegurado nasegurado = new PanelNoAsegurado();
-            nasegurado.setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(null, "NO CUENTAS CON UNA CUENTA ");
+            VerificaciondeCuentaNoAsegurado();
+//            PanelNoAsegurado nasegurado = new PanelNoAsegurado();
+//            nasegurado.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "NO HAS COLOCADO UNA OPCION CORRECTA ");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void VerificaciondeCuentaAsegurado() {
+        int contador = 0;
+        loginSi = JOptionPane.showInputDialog("INGRESA TU DPI");
+        for (int i = 0; i < 20; i++) {
+            if (miscuentas[i] != null) {
+                if (miscuentas[i].getDpi().equals(loginSi)) {
+                    PanelAsegurado asegurado = new PanelAsegurado();
+                    asegurado.setVisible(true);
+                    contador = 1;
+                }
+            }
+        }
+        if (contador == 0) {
+            JOptionPane.showMessageDialog(null, "ESTE DPI NO CUENTA CON UNA CUENTA ASEGURADORA");
+        }
+    }
+
+    public void VerificaciondeCuentaNoAsegurado() {
+        int contador = 0;
+        loginNo = JOptionPane.showInputDialog("INGRESA TU DPI");
+        for (int i = 0; i < 20; i++) {
+            if (nocuentas[i] != null) {
+                if (nocuentas[i].getDpi().equals(loginNo)) {
+                    PanelNoAsegurado nasegurado = new PanelNoAsegurado();
+                    nasegurado.setVisible(true);
+                    contador = 1;
+                }
+            }
+        }
+        if (contador == 0) {
+            JOptionPane.showMessageDialog(null, "ESTE DPI NO CUENTA CON UNA CUENTA NO ASEGURADORA");
+        }
+    }
+
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // METODO CARGAR DATOS        

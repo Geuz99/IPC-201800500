@@ -13,21 +13,21 @@ public class NoCuentas {
     private String nombre;    
     private String dpi;
     private String talefono;
-    private String tipo;
-    private String descipcion;
-    private String monto;
-    private String poliza;
-    private String deducible;
+//    private String tipo;
+//    private String descipcion;
+//    private String monto;
+//    private String poliza;
+//    private String deducible;
 
-    public NoCuentas(String nombre, String dpi, String talefono, String tipo, String descipcion, String monto, String poliza, String deducible) {
+    public NoCuentas(String nombre, String dpi, String talefono) {
         this.nombre = nombre;
         this.dpi = dpi;
         this.talefono = talefono;
-        this.tipo = tipo;
-        this.descipcion = descipcion;
-        this.monto = monto;
-        this.poliza = poliza;
-        this.deducible = deducible;
+//        this.tipo = tipo;
+//        this.descipcion = descipcion;
+//        this.monto = monto;
+//        this.poliza = poliza;
+//        this.deducible = deducible;
     }
 
     /**
@@ -75,72 +75,72 @@ public class NoCuentas {
     /**
      * @return the tipo
      */
-    public String getTipo() {
-        return tipo;
-    }
-
-    /**
-     * @param tipo the tipo to set
-     */
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
+//    public String getTipo() {
+//        return tipo;
+//    }
+//
+//    /**
+//     * @param tipo the tipo to set
+//     */
+//    public void setTipo(String tipo) {
+//        this.tipo = tipo;
+//    }
 
     /**
      * @return the descipcion
      */
-    public String getDescipcion() {
-        return descipcion;
-    }
-
-    /**
-     * @param descipcion the descipcion to set
-     */
-    public void setDescipcion(String descipcion) {
-        this.descipcion = descipcion;
-    }
-
-    /**
-     * @return the monto
-     */
-    public String getMonto() {
-        return monto;
-    }
-
-    /**
-     * @param monto the monto to set
-     */
-    public void setMonto(String monto) {
-        this.monto = monto;
-    }
-
-    /**
-     * @return the poliza
-     */
-    public String getPoliza() {
-        return poliza;
-    }
-
-    /**
-     * @param poliza the poliza to set
-     */
-    public void setPoliza(String poliza) {
-        this.poliza = poliza;
-    }
-
-    /**
-     * @return the deducible
-     */
-    public String getDeducible() {
-        return deducible;
-    }
-
-    /**
-     * @param deducible the deducible to set
-     */
-    public void setDeducible(String deducible) {
-        this.deducible = deducible;
-    }
+//    public String getDescipcion() {
+//        return descipcion;
+//    }
+//
+//    /**
+//     * @param descipcion the descipcion to set
+//     */
+//    public void setDescipcion(String descipcion) {
+//        this.descipcion = descipcion;
+//    }
+//
+//    /**
+//     * @return the monto
+//     */
+//    public String getMonto() {
+//        return monto;
+//    }
+//
+//    /**
+//     * @param monto the monto to set
+//     */
+//    public void setMonto(String monto) {
+//        this.monto = monto;
+//    }
+//
+//    /**
+//     * @return the poliza
+//     */
+//    public String getPoliza() {
+//        return poliza;
+//    }
+//
+//    /**
+//     * @param poliza the poliza to set
+//     */
+//    public void setPoliza(String poliza) {
+//        this.poliza = poliza;
+//    }
+//
+//    /**
+//     * @return the deducible
+//     */
+//    public String getDeducible() {
+//        return deducible;
+//    }
+//
+//    /**
+//     * @param deducible the deducible to set
+//     */
+//    public void setDeducible(String deducible) {
+//        this.deducible = deducible;
+//    }
     
     
     

@@ -10,7 +10,7 @@ package Clases;
  * @author GEUZ99
  */
 public class Modelo {
-    private int anio;
+    private int anio;  
     private double depreciacion;
 
     public Modelo(String anio, String depreciacion) {
